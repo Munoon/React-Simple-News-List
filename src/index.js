@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { App } from './App.js';
+import 'materialize-css/dist/css/materialize.min.css';
 
 ReactDOM.render(
-  <h1>Hi!</h1>,
+  <App />,
   document.getElementById('root')
 );
