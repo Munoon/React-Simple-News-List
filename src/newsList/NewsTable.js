@@ -5,7 +5,7 @@ export class NewsTable extends React.Component {
         return (
             <div className="row">
                 {this.props.news.map(letter => 
-                    <NewsCard author={letter.author} title={letter.title} description={letter.description}
+                    <NewsCard key={letter.id} author={letter.author} title={letter.title} description={letter.description}
                         url={letter.url} image={letter.urlToImage} date={letter.publishedAt}  />
                 )}
             </div>
