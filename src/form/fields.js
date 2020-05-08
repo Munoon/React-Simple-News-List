@@ -22,3 +22,12 @@ export function InputForm(props) {
         </div>
     );
 }
+
+export function RangeForm(props) {
+    return (
+        <p className="range-field">
+            <label>{props.text} ({props.value})</label>
+            <input type="range" min={props.min} max={props.max} value={props.value} onChange={props.onChange} name={props.name} />
+        </p>
+    );
+}

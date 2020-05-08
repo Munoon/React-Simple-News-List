@@ -16,7 +16,8 @@ export class App extends React.Component {
         this.defautSettings = {
             selectedCountry: 'ua',
             selectedCategory: 'none',
-            query: ''
+            query: '',
+            newsCount: 20
         };
         this.state = {
             settings: this.defautSettings,
@@ -43,13 +44,13 @@ export class App extends React.Component {
         const that = this;
         const apiKey = this.state.apiKey;
 
-        const selectedCategory = this.state.settings.selectedCategory;
+        const { newsCount, selectedCategory } = this.state.settings;
         const category = selectedCategory === 'none' ? '' : `&category=${selectedCategory}`;
     
         const textQuery = this.state.settings.query;
         const query = textQuery === '' ? '' : `&q=${textQuery}`;
 
-        fetch(`${API_URL}?country=${this.state.settings.selectedCountry}${category}${query}&apiKey=${apiKey}`)
+        fetch(`${API_URL}?country=${this.state.settings.selectedCountry}${category}${query}&pageSize=${newsCount}&apiKey=${apiKey}`)
             .then(data => data.json())
             .then(response => {
                 if (response.status === 'error') {

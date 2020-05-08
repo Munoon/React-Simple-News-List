@@ -1,5 +1,5 @@
 import React from 'react';
-import { SelectForm, InputForm } from './fields';
+import { SelectForm, InputForm, RangeForm } from './fields';
 
 export class NewsForm extends React.Component {
     constructor(props) {
@@ -21,6 +21,8 @@ export class NewsForm extends React.Component {
         } else if (target.name === 'query') {
             let query = target.value;
             this.setState({ query }, () => this.props.onDataChange(this.state));
+        } else if (target.name === 'news_count') {
+            this.setState({ newsCount: +e.target.value }, () => this.props.onDataChange(this.state));
         }
     }
 
@@ -33,12 +35,19 @@ export class NewsForm extends React.Component {
 
     render() {
         return (
-            <form className="row">
-                <SelectForm settings={selectCountry} onChange={this.handleOnChange} values={this.state.selectedCounties}
-                    name={'country'} text={'Country'} />
-                <SelectForm settings={selectCategory} onChange={this.handleOnChange} values={this.state.selectedCategory}
-                    name={'category'} text={'Category'} />
-                <InputForm name={'query'} text={'Search'} value={this.state.query} onChange={this.handleOnChange} />
+            <form>
+                <div className="row">
+                    <SelectForm settings={selectCountry} onChange={this.handleOnChange} values={this.state.selectedCounties}
+                        name={'country'} text={'Country'} />
+                    <SelectForm settings={selectCategory} onChange={this.handleOnChange} values={this.state.selectedCategory}
+                        name={'category'} text={'Category'} />
+                    <InputForm name={'query'} text={'Search'} value={this.state.query} onChange={this.handleOnChange} />
+                </div>
+                <div className="row">
+                    <div className="col sm1">
+                        <RangeForm min={0} max={100} text={'News count'} name={'news_count'} value={this.state.newsCount} onChange={this.handleOnChange} />
+                    </div>
+                </div>
             </form>
         );
     }
