@@ -1,15 +1,11 @@
 import React from 'react';
+import { SelectForm, InputForm } from './fields';
 
 export class NewsForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.props.defautSettings;
         this.handleOnChange = this.handleOnChange.bind(this);
-
-        document.addEventListener('DOMContentLoaded', () => {
-            let elems = document.querySelectorAll('select');
-            window.M.FormSelect.init(elems);
-        });
     }
 
     handleOnChange(e) {
@@ -22,7 +18,17 @@ export class NewsForm extends React.Component {
         } else if (target.name === 'category') {
             let selectedCategory = target.querySelector('option:checked').value;
             this.setState({ selectedCategory }, () => this.props.onDataChange(this.state));
+        } else if (target.name === 'query') {
+            let query = target.value;
+            this.setState({ query }, () => this.props.onDataChange(this.state));
         }
+    }
+
+    componentDidUpdate() {
+        let selectElements = document.querySelectorAll('select');
+        window.M.FormSelect.init(selectElements);
+
+        window.M.updateTextFields();
     }
 
     render() {
@@ -32,22 +38,10 @@ export class NewsForm extends React.Component {
                     name={'country'} text={'Country'} />
                 <SelectForm settings={selectCategory} onChange={this.handleOnChange} values={this.state.selectedCategory}
                     name={'category'} text={'Category'} />
+                <InputForm name={'query'} text={'Search'} value={this.state.query} onChange={this.handleOnChange} />
             </form>
         );
     }
-}
-
-function SelectForm(props) {
-    return (
-        <div className="input-field col s3">
-            <select name={props.name} onChange={props.onChange} value={props.values}>
-                {props.settings.map(item => 
-                    <option value={item.name} key={item.name}>{item.text}</option>    
-                )}
-            </select>
-            <label>{props.text}</label>
-        </div>
-    )
 }
 
 const selectCountry = [
