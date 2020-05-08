@@ -1,7 +1,7 @@
 import React from 'react';
 import { NewsList } from './newsList/NewsList';
 import { NewsForm } from './form/NewsForm';
-import { InputForm } from './form/fields';
+import { ApiKeyInput } from './ApiKeyInput';
 
 const API_URL = 'https://newsapi.org/v2/top-headlines';
 // const API_KEY = 'a5b2d699fc00492984ae7533b76321a0';
@@ -11,7 +11,7 @@ export class App extends React.Component {
         super(props);
         this.onDataChange = this.onDataChange.bind(this);
         this.loadNews = this.loadNews.bind(this);
-        this.onApiKeyChange = this.onApiKeyChange.bind(this);
+        this.setApiKey = this.setApiKey.bind(this);
 
         this.defautSettings = {
             selectedCountry: 'ua',
@@ -31,10 +31,8 @@ export class App extends React.Component {
         this.setState({ settings: data }, () => this.loadNews());
     }
 
-    onApiKeyChange(e) {
-        this.setState({
-            apiKey: e.target.value
-        }, () => this.loadNews());
+    setApiKey(apiKey) {
+        this.setState({ apiKey }, () => this.loadNews());
     }
 
     loadNews() {
@@ -75,7 +73,7 @@ export class App extends React.Component {
     render() {
         return (
             <div className="container" style={{marginLeft: 10}}>
-                <InputForm name={'apiKey'} text={'API KEY'} value={this.state.apiKey} onChange={this.onApiKeyChange} />
+                <ApiKeyInput onChange={this.setApiKey} />
                 <NewsForm onDataChange={this.onDataChange} defautSettings={this.defautSettings} />
                 <NewsList data={this.state.news} />
             </div>

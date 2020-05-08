@@ -18,6 +18,7 @@ export function InputForm(props) {
         <div className="input-field col s3">
             <input id={props.name} name={props.name} value={props.value} onChange={props.onChange} type="text" className="validate" />
             <label htmlFor={props.name} className="active">{props.text}</label>
+            {props.children}
         </div>
     );
 }
