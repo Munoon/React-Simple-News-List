@@ -2,6 +2,9 @@ import React from 'react';
 import { NewsList } from './newsList/NewsList';
 import { NewsForm } from './newsForm/NewsForm';
 
+const API_URL = 'https://newsapi.org/v2/top-headlines';
+const API_KEY = 'a5b2d699fc00492984ae7533b76321a0';
+
 export class App extends React.Component {
     constructor(props) {
         super(props);
@@ -9,7 +12,8 @@ export class App extends React.Component {
         this.loadNews = this.loadNews.bind(this);
 
         this.defautSettings = {
-            selectedCountry: 'ua'
+            selectedCountry: 'ua',
+            selectedCategory: 'none'
         };
         this.state = {
             settings: this.defautSettings,
@@ -25,7 +29,9 @@ export class App extends React.Component {
 
     loadNews() {
         const that = this;
-        fetch(`https://newsapi.org/v2/top-headlines?country=${this.state.settings.selectedCountry}&apiKey=a5b2d699fc00492984ae7533b76321a0`)
+        const selectedCategory = this.state.settings.selectedCategory;
+        const category = selectedCategory === 'none' ? '' : `&category=${selectedCategory}`;
+        fetch(`${API_URL}?country=${this.state.settings.selectedCountry}${category}&apiKey=${API_KEY}`)
             .then(data => data.json())
             .then(response => {
                 if (response.status === 'error') {

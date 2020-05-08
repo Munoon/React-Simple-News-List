@@ -3,10 +3,7 @@ import React from 'react';
 export class NewsForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            selectedCounties: this.props.defautSettings.selectedCounties
-        };
-
+        this.state = this.props.defautSettings;
         this.handleOnChange = this.handleOnChange.bind(this);
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -21,9 +18,10 @@ export class NewsForm extends React.Component {
 
         if (target.name === 'country') {
             let selectedCountry = target.querySelector('option:checked').value;
-
-            this.setState({ selectedCountry });
-            this.props.onDataChange({ selectedCountry });
+            this.setState({ selectedCountry }, () => this.props.onDataChange(this.state));
+        } else if (target.name === 'category') {
+            let selectedCategory = target.querySelector('option:checked').value;
+            this.setState({ selectedCategory }, () => this.props.onDataChange(this.state));
         }
     }
 
@@ -32,6 +30,8 @@ export class NewsForm extends React.Component {
             <form className="row">
                 <SelectForm settings={selectCountry} onChange={this.handleOnChange} values={this.state.selectedCounties}
                     name={'country'} text={'Country'} />
+                <SelectForm settings={selectCategory} onChange={this.handleOnChange} values={this.state.selectedCategory}
+                    name={'category'} text={'Category'} />
             </form>
         );
     }
@@ -56,4 +56,15 @@ const selectCountry = [
     { name: 'ru', text: 'Russia' },
     { name: 'it', text: 'Italy' },
     { name: 'ge', text: 'Germany' }
-]
+];
+
+const selectCategory = [
+    { name: 'none', text: 'Not Selected' },
+    { name: 'business', text: 'Busines' },
+    { name: 'entertainment', text: 'Entertainment' },
+    { name: 'general', text: 'General' },
+    { name: 'health', text: 'Health' },
+    { name: 'science', text: 'Science' },
+    { name: 'sports', text: 'Sports' },
+    { name: 'technology', text: 'Technology' }
+];
