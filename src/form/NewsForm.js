@@ -41,7 +41,7 @@ export class NewsForm extends React.Component {
     render() {
         return (
             <form>
-                <div className="row">
+                <div className="row" style={{marginBottom: 0}}>
                     <SelectForm settings={selectCountry} onChange={this.handleOnChange} values={this.state.selectedCounties}
                         name={'country'} text={'Country'} />
                     <SelectForm settings={selectCategory} onChange={this.handleOnChange} values={this.state.selectedCategory}

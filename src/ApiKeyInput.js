@@ -34,8 +34,10 @@ export class ApiKeyInput extends React.Component {
         return (
             <div className="row">
                 <InputForm name={'apiKey'} value={this.state.apiKey} text={'API Key'} onChange={this.handleOnChange} />
-                <div className="input-field col s6">
+                <div className="input-field col">
                     <button className="btn waves-effect waves-light" onClick={this.saveKey}>Save</button>
+                    <a href="https://newsapi.org" target="_blank" rel="noopener noreferrer" 
+                        className="btn waves-effect waves-light" style={{marginLeft: 3}}>Get Token</a>
                 </div>
             </div>
         );
