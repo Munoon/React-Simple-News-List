@@ -1,5 +1,5 @@
 import React from 'react';
-import { SelectForm, InputForm, RangeForm } from './fields';
+import { SelectForm, InputForm, RangeForm, NumberForm } from './fields';
 
 export class NewsForm extends React.Component {
     constructor(props) {
@@ -23,6 +23,11 @@ export class NewsForm extends React.Component {
             this.setState({ query }, () => this.props.onDataChange(this.state));
         } else if (target.name === 'news_count') {
             this.setState({ newsCount: +e.target.value }, () => this.props.onDataChange(this.state));
+        } else if (target.name === 'page') {
+            const page = +e.target.value;
+            if (page >= 1) {
+                this.setState({ page }, () => this.props.onDataChange(this.state));
+            }
         }
     }
 
@@ -46,6 +51,9 @@ export class NewsForm extends React.Component {
                 <div className="row">
                     <div className="col sm1">
                         <RangeForm min={0} max={100} text={'News count'} name={'news_count'} value={this.state.newsCount} onChange={this.handleOnChange} />
+                    </div>
+                    <div className="col sm1">
+                        <NumberForm name='page' text='Page' value={this.state.page} onChange={this.handleOnChange} />
                     </div>
                 </div>
             </form>

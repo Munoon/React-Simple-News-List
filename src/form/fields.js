@@ -18,7 +18,6 @@ export function InputForm(props) {
         <div className="input-field col s3">
             <input id={props.name} name={props.name} value={props.value} onChange={props.onChange} type="text" className="validate" />
             <label htmlFor={props.name} className="active">{props.text}</label>
-            {props.children}
         </div>
     );
 }
@@ -29,5 +28,14 @@ export function RangeForm(props) {
             <label>{props.text} ({props.value})</label>
             <input type="range" min={props.min} max={props.max} value={props.value} onChange={props.onChange} name={props.name} />
         </p>
+    );
+}
+
+export function NumberForm(props) {
+    return (
+        <div className="input-field col s3">
+            <input id={props.name} name={props.name} value={props.value} onChange={props.onChange} type="number" className="validate" />
+            <label htmlFor={props.name} className="active">{props.text}</label>
+        </div>
     );
 }
