@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputForm } from './form/fields';
+import { InputForm } from '../form/fields';
 
 const API_KEY_SORAGE_KEY = "news_list_api_key";
 
@@ -35,7 +35,6 @@ export class ApiKeyInput extends React.Component {
             <div className="row">
                 <InputForm name={'apiKey'} value={this.state.apiKey} text={'API Key'} onChange={this.handleOnChange} />
                 <div className="input-field col">
-                    <button className="btn waves-effect waves-light" onClick={this.saveKey}>Save</button>
                     <a href="https://newsapi.org" target="_blank" rel="noopener noreferrer" 
                         className="btn waves-effect waves-light" style={{marginLeft: 3}}>Get Token</a>
                 </div>

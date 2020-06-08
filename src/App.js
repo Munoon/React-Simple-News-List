@@ -1,7 +1,7 @@
 import React from 'react';
 import { NewsList } from './newsList/NewsList';
 import { NewsForm } from './form/NewsForm';
-import { ApiKeyInput } from './ApiKeyInput';
+import { SettingsForm } from './settings/SettingsForm';
 
 const API_URL = 'https://newsapi.org/v2/top-headlines';
 // const API_KEY = 'a5b2d699fc00492984ae7533b76321a0';
@@ -11,7 +11,7 @@ export class App extends React.Component {
         super(props);
         this.onDataChange = this.onDataChange.bind(this);
         this.loadNews = this.loadNews.bind(this);
-        this.setApiKey = this.setApiKey.bind(this);
+        this.setSettings = this.setSettings.bind(this);
 
         this.defautSettings = {
             selectedCountry: 'ua',
@@ -23,7 +23,9 @@ export class App extends React.Component {
         this.state = {
             settings: this.defautSettings,
             news: [],
-            apiKey: ''
+            settings: {
+                apiKey: ''
+            }
         };
         
         this.lastLetterIndex = 0;
@@ -33,17 +35,18 @@ export class App extends React.Component {
         this.setState({ settings: data }, () => this.loadNews());
     }
 
-    setApiKey(apiKey) {
-        this.setState({ apiKey }, () => this.loadNews());
+    setSettings(settings) {
+        console.log('new settings:', settings);
+        this.setState({ settings }, () => this.loadNews());
     }
 
     loadNews() {
-        if (this.state.apiKey === '') {
+        if (this.state.settings.apiKey === '') {
             return;
         }
 
         const that = this;
-        const apiKey = this.state.apiKey;
+        const apiKey = this.state.settings.apiKey;
 
         const { newsCount, selectedCategory, page } = this.state.settings;
         const category = selectedCategory === 'none' ? '' : `&category=${selectedCategory}`;
@@ -75,7 +78,7 @@ export class App extends React.Component {
     render() {
         return (
             <div className="container" style={{marginLeft: 10}}>
-                <ApiKeyInput onChange={this.setApiKey} />
+                <SettingsForm onChange={this.setSettings} />
                 <NewsForm onDataChange={this.onDataChange} defautSettings={this.defautSettings} />
                 <NewsList data={this.state.news} />
             </div>
