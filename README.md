@@ -1,6 +1,8 @@
 # React-Simple-News-List
 Simple news list created on ReactJS. This is student project, which use [News API](https://newsapi.org).
 
+### [DEMO APPLICATION](https://munoon.github.io/React-Simple-News-List/)
+
 ## How to launch
 1. Clone repository using `git clone https://github.com/Munoon/React-Simple-News-List.git`
 2. Instal `NodeJS` and `npm`, if not installed already.
