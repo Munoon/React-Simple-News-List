@@ -46,7 +46,7 @@ export class NewsForm extends React.Component {
                         name={'country'} text={'Country'} />
                     <SelectForm settings={selectCategory} onChange={this.handleOnChange} values={this.state.selectedCategory}
                         name={'category'} text={'Category'} />
-                    <InputForm name={'query'} text={'Search'} value={this.state.query} onChange={this.handleOnChange} />
+                    <InputForm name={'query'} text={'Search'} className='col s3' value={this.state.query} onChange={this.handleOnChange} />
                 </div>
                 <div className="row">
                     <div className="col sm1">

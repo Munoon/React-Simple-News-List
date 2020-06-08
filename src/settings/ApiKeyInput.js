@@ -1,18 +1,18 @@
 import React from 'react';
 import { InputForm } from '../form/fields';
 
-const API_KEY_SORAGE_KEY = "news_list_api_key";
+const API_KEY_STORAGE_KEY = "news_list_api_key";
 
 export class ApiKeyInput extends React.Component {
     constructor(props) {
         super(props);
         
-        const apiKey = localStorage.getItem(API_KEY_SORAGE_KEY) || '';
+        const apiKey = localStorage.getItem(API_KEY_STORAGE_KEY) || '';
         this.state = { apiKey };
         this.props.onChange(apiKey);
         
         this.handleOnChange = this.handleOnChange.bind(this);
-        this.saveKey = this.saveKey.bind(this);
+        this.saveValue = this.saveValue.bind(this);
     }
 
     handleOnChange(e) {
@@ -21,9 +21,9 @@ export class ApiKeyInput extends React.Component {
         this.props.onChange(apiKey);
     }
 
-    saveKey() {
+    saveValue() {
         const apiKey = this.state.apiKey;
-        localStorage.setItem(API_KEY_SORAGE_KEY, apiKey);
+        localStorage.setItem(API_KEY_STORAGE_KEY, apiKey);
     }
 
     componentDidUpdate() {
@@ -32,13 +32,15 @@ export class ApiKeyInput extends React.Component {
 
     render() {
         return (
-            <div className="row">
-                <InputForm name={'apiKey'} value={this.state.apiKey} text={'API Key'} onChange={this.handleOnChange} />
+            <>
+                <div className="input-field col s4">
+                    <InputForm name={'apiKey'} value={this.state.apiKey} text={'API Key'} onChange={this.handleOnChange} />
+                </div>
                 <div className="input-field col">
                     <a href="https://newsapi.org" target="_blank" rel="noopener noreferrer" 
                         className="btn waves-effect waves-light" style={{marginLeft: 3}}>Get Token</a>
                 </div>
-            </div>
+            </>
         );
     }
 }

@@ -15,7 +15,7 @@ export function SelectForm(props) {
 
 export function InputForm(props) {
     return (
-        <div className="input-field col s3">
+        <div className={"input-field " + (props.className || '')}>
             <input id={props.name} name={props.name} value={props.value} onChange={props.onChange} type="text" className="validate" />
             <label htmlFor={props.name} className="active">{props.text}</label>
         </div>
@@ -39,3 +39,18 @@ export function NumberForm(props) {
         </div>
     );
 }
+
+export function ChekboxForm(props) {
+    return (
+        <label className="input-field col">
+            <input name={props.name} checked={props.value} onChange={props.onChange} type='checkbox' />
+            <span>{props.text}</span>
+        </label>
+    );
+}
+
+export const ButtonForm = props => (
+    <div className='input-field col'>
+        <button className="btn waves-effect waves-light" onClick={props.onClick}>{props.children}</button>
+    </div>
+);
